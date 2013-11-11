@@ -4,6 +4,7 @@ import os
 import sys
 import imp
 import tempfile
+import traceback
 
 from django.conf import settings
 from django.utils.importlib import import_module
@@ -70,5 +71,8 @@ class Command(BaseCommand):
                 sys.exit(1)
 
         log.info("Beginning job: %s %s" % (script, args))
-        registered[script](*args)
+        try:
+            registered[script](*args)
+        except Exception:
+            log.error(traceback.format_exc())
         log.info("Ending job: %s %s" % (script, args))
