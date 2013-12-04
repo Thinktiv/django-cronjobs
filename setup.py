@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='django-cronjobs',
-    version='0.2.4',
+    version='0.2.5',
     description='A simple Django app for running cron jobs.',
     long_description=open('README.rst').read(),
     author='Mozilla',

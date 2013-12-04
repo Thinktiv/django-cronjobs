@@ -5,6 +5,7 @@ import sys
 import imp
 import tempfile
 import traceback
+import datetime
 
 from django.conf import settings
 from django.utils.importlib import import_module
@@ -70,9 +71,9 @@ class Command(BaseCommand):
                 sys.stderr.write(msg + "\n")
                 sys.exit(1)
 
-        log.info("Beginning job: %s %s" % (script, args))
+        log.info("Beginning job: %s %s at %s" % (script, args, datetime.datetime.now()))
         try:
             registered[script](*args)
         except Exception:
             log.error(traceback.format_exc())
-        log.info("Ending job: %s %s" % (script, args))
+        log.info("Ending job: %s %s at %s" % (script, args, datetime.datetime.now()))
